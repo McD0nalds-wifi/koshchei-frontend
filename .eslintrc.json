@@ -1,3 +1,50 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:typescript-sort-keys/recommended",
+    "plugin:storybook/recommended",
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": ["formatjs", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "import/no-unresolved": "error",
+    "import/default": "error",
+    "import/no-self-import": "error",
+    "import/no-duplicates": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
+    ],
+    "sort-imports": ["error", { "allowSeparatedGroups": true, "ignoreDeclarationSort": true }],
+//    "formatjs/enforce-id": [
+//      "error",
+//      {
+//        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+//      }
+//    ],
+    "react/jsx-curly-brace-presence": "warn",
+    "react/jsx-sort-props": "warn",
+    "sort-keys-fix/sort-keys-fix": "warn"
+  }
 }
