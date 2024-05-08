@@ -1,5 +1,8 @@
 export const routes = {
-    // watchlist: {
-    //     getRoute: () => "/watchlist",
-    // },
+    login: {
+        getRoute: () => '/auth/login',
+    },
+    register: {
+        getRoute: () => '/auth/register',
+    },
 } as const
