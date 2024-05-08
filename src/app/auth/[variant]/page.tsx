@@ -1,44 +1,19 @@
-'use client'
+import { Metadata } from 'next'
 
-import { Space, Typography } from 'antd'
-import NextLink from 'next/link'
-import { useParams } from 'next/navigation'
-
-import { LoginForm, RegisterForm } from '@/features/auth'
-import { routes } from '@/shared/routes'
+import { NO_INDEX_PAGE } from '@/shared/constants/seo'
+import { AuthFormWrapper } from '@/widgets/auth-form-wrapper'
 
 import styles from './page.module.css'
 
-const { Title, Link, Text } = Typography
+export const metadata: Metadata = {
+    title: 'Авторизация',
+    ...NO_INDEX_PAGE,
+}
 
 export default function Auth() {
-    const { variant } = useParams<{ variant: 'login' | 'register' }>()
-
     return (
         <div className={styles.wrapper}>
-            <Space className={styles.form} direction='vertical' size='middle'>
-                <Title level={2}>{variant === 'login' ? 'Вход' : 'Регистрация'}</Title>
-
-                {variant === 'login' ? <LoginForm /> : <RegisterForm />}
-
-                <div style={{ textAlign: 'center' }}>
-                    {variant === 'login' ? (
-                        <>
-                            <Text>Нет аккаунта?</Text>{' '}
-                            <NextLink href={routes.register.getRoute()} legacyBehavior passHref>
-                                <Link>Зарегистрироваться</Link>
-                            </NextLink>
-                        </>
-                    ) : (
-                        <>
-                            <Text>Уже есть аккаунт?</Text>{' '}
-                            <NextLink href={routes.login.getRoute()} legacyBehavior passHref>
-                                <Link>Войти</Link>
-                            </NextLink>
-                        </>
-                    )}
-                </div>
-            </Space>
+            <AuthFormWrapper />
         </div>
     )
 }

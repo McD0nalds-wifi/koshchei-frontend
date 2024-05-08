@@ -24,6 +24,27 @@ export const APP_REDUCER_PATH = 'app'
 
 export const SERVER_API_URL = 'http://localhost:4001/api'
 
+type Error = {
+    error: string
+    message: string | Array<string>
+    statusCode: number
+}
+
+type ErrorResponse = {
+    data: Error
+    status: number
+}
+
+export const isApiRequestError = (unknown: unknown): unknown is Error => {
+    const error = unknown as Error
+    return typeof error.error === 'string'
+}
+
+export const isApiRequestErrorResponse = (unknownResponse: unknown): unknownResponse is ErrorResponse => {
+    const response = unknownResponse as ErrorResponse
+    return Boolean(response.data) && isApiRequestError(response?.data)
+}
+
 export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
     args,
     api,
@@ -32,6 +53,9 @@ export const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryE
     const baseQuery = fetchBaseQuery({
         baseUrl: SERVER_API_URL,
         credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         prepareHeaders: (headers) => {
             const accessToken = getAccessToken()
 

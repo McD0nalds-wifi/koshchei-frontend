@@ -2,3 +2,4 @@ export { authApi, useLoginMutation, useLogoutMutation, useRegisterMutation } fro
 export type { IAuthResponse } from './types'
 export { LoginForm } from './ui/LoginForm'
 export { RegisterForm } from './ui/RegisterForm'
+export type { IRegisterForm } from './ui/RegisterForm'

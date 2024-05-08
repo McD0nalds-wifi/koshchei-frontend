@@ -1,4 +1,6 @@
+import { userApi } from '@/entities/user'
 import { appApi } from '@/shared/api'
+import { saveAccessTokenStorage } from '@/shared/utils/saveAccessTokenStorage'
 
 import { IAuthResponse } from '../types'
 
@@ -10,7 +12,14 @@ interface IAuthArgs {
 export const authApi = appApi.injectEndpoints({
     endpoints: (build) => ({
         login: build.mutation<IAuthResponse, IAuthArgs>({
-            query: () => ({
+            onQueryStarted: async (instrumentId, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+
+                saveAccessTokenStorage(data.accessToken)
+                dispatch(userApi.util.upsertQueryData('getUser', undefined, data.user))
+            },
+            query: (args) => ({
+                body: args,
                 method: 'POST',
                 url: '/auth/login',
             }),
@@ -22,7 +31,14 @@ export const authApi = appApi.injectEndpoints({
             }),
         }),
         register: build.mutation<IAuthResponse, IAuthArgs>({
-            query: () => ({
+            onQueryStarted: async (instrumentId, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+
+                saveAccessTokenStorage(data.accessToken)
+                dispatch(userApi.util.upsertQueryData('getUser', undefined, data.user))
+            },
+            query: (args) => ({
+                body: args,
                 method: 'POST',
                 url: '/auth/register',
             }),

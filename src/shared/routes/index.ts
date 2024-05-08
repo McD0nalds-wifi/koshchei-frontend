@@ -5,4 +5,7 @@ export const routes = {
     register: {
         getRoute: () => '/auth/register',
     },
+    tasks: {
+        getRoute: () => '/tasks',
+    },
 } as const

@@ -19,22 +19,39 @@ export const LoginForm = ({ onSubmit, onSubmitFailed }: ILoginFormProps) => {
             name='login'
             onFinish={onSubmit}
             onFinishFailed={onSubmitFailed}
+            size='large'
         >
-            <Form.Item<IField> name='email' rules={[{ message: 'Введите вашу почту', required: true }]}>
-                <Input placeholder='E-mail' prefix={<MailOutlined style={{ color: '#d9d9d9' }} />} size='large' />
+            <Form.Item<IField>
+                hasFeedback
+                name='email'
+                rules={[
+                    {
+                        message: 'Вы ввели невалидный E-mail',
+                        type: 'email',
+                    },
+                    { message: 'Введите вашу почту', required: true },
+                ]}
+            >
+                <Input placeholder='E-mail' prefix={<MailOutlined style={{ color: '#d9d9d9' }} />} type='email' />
             </Form.Item>
 
-            <Form.Item<IField> name='password' rules={[{ message: 'Введите ваш пароль', required: true }]}>
+            <Form.Item<IField>
+                hasFeedback
+                name='password'
+                rules={[
+                    { message: 'Введите ваш пароль', required: true },
+                    { message: 'Минимальная длина пароля 6 символов', min: 6 },
+                ]}
+            >
                 <Input.Password
                     placeholder='Пароль'
                     prefix={<LockOutlined style={{ color: '#d9d9d9' }} />}
-                    size='large'
                     type='password'
                 />
             </Form.Item>
 
             <Form.Item>
-                <Button block htmlType='submit' size='large' type='primary'>
+                <Button block htmlType='submit' type='primary'>
                     Войти
                 </Button>
             </Form.Item>
