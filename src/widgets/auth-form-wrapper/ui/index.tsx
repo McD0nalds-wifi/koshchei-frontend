@@ -17,8 +17,8 @@ export const AuthFormWrapper = () => {
     const { variant } = useParams<{ variant: 'login' | 'register' }>()
     const { replace } = useRouter()
 
-    const [register] = useRegisterMutation()
-    const [login] = useLoginMutation()
+    const [register, { isLoading: registerLoading }] = useRegisterMutation()
+    const [login, { isLoading: loginLoading }] = useLoginMutation()
 
     const handleFormSubmit = async ({ email, password }: IRegisterForm) => {
         if (!email || !password) {
@@ -54,9 +54,9 @@ export const AuthFormWrapper = () => {
             <Title level={2}>{variant === 'login' ? 'Вход' : 'Регистрация'}</Title>
 
             {variant === 'login' ? (
-                <LoginForm onSubmit={handleFormSubmit} />
+                <LoginForm loading={loginLoading} onSubmit={handleFormSubmit} />
             ) : (
-                <RegisterForm onSubmit={handleFormSubmit} />
+                <RegisterForm loading={registerLoading} onSubmit={handleFormSubmit} />
             )}
 
             <div style={{ textAlign: 'center' }}>

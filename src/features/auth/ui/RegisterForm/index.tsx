@@ -7,11 +7,12 @@ export interface IRegisterForm {
 }
 
 interface IRegisterFormProps {
+    loading: boolean
     onSubmit?: FormProps<IRegisterForm>['onFinish']
     onSubmitFailed?: FormProps<IRegisterForm>['onFinishFailed']
 }
 
-export const RegisterForm = ({ onSubmit, onSubmitFailed }: IRegisterFormProps) => {
+export const RegisterForm = ({ loading, onSubmit, onSubmitFailed }: IRegisterFormProps) => {
     return (
         <Form
             autoComplete='off'
@@ -77,7 +78,7 @@ export const RegisterForm = ({ onSubmit, onSubmitFailed }: IRegisterFormProps) =
             </Form.Item>
 
             <Form.Item>
-                <Button block htmlType='submit' size='large' type='primary'>
+                <Button block htmlType='submit' loading={loading} size='large' type='primary'>
                     Зарегистрироваться
                 </Button>
             </Form.Item>

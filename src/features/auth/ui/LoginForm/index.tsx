@@ -7,11 +7,12 @@ interface IField {
 }
 
 interface ILoginFormProps {
+    loading: boolean
     onSubmit?: FormProps<IField>['onFinish']
     onSubmitFailed?: FormProps<IField>['onFinishFailed']
 }
 
-export const LoginForm = ({ onSubmit, onSubmitFailed }: ILoginFormProps) => {
+export const LoginForm = ({ loading, onSubmit, onSubmitFailed }: ILoginFormProps) => {
     return (
         <Form
             autoComplete='off'
@@ -51,7 +52,7 @@ export const LoginForm = ({ onSubmit, onSubmitFailed }: ILoginFormProps) => {
             </Form.Item>
 
             <Form.Item>
-                <Button block htmlType='submit' type='primary'>
+                <Button block htmlType='submit' loading={loading} type='primary'>
                     Войти
                 </Button>
             </Form.Item>
