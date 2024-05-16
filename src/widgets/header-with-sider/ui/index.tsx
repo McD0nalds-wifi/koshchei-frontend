@@ -1,18 +1,12 @@
 'use client'
 import { ReactNode } from 'react'
 
-import { BarsOutlined } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 
 import styles from './index.module.css'
+import { ITEMS, ITEMS_LIST } from '../config'
 
 const { Header, Content, Footer, Sider } = Layout
-
-const ITEMS = {
-    tasks: { icon: <BarsOutlined />, key: 'tasks', label: 'Задачи' },
-}
-
-const ITEMS_LIST = [ITEMS.tasks]
 
 export const HeaderWithSider = ({ children }: { children: ReactNode }) => {
     return (

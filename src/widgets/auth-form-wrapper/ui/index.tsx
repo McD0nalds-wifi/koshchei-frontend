@@ -32,6 +32,7 @@ export const AuthFormWrapper = () => {
         }
 
         try {
+            // TODO
             variant === 'login'
                 ? await login({ email, password }).unwrap()
                 : await register({ email, password }).unwrap()
